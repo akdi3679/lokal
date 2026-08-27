@@ -1,0 +1,33 @@
+# deps
+/node_modules
+
+# next
+/.next
+/out
+/build
+
+# env — JAMAIS de secrets en repo (§17)
+.env
+.env.local
+.env.*.local
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+yarn-error.log*
+
+# ide
+.idea
+.vscode/*
+!.vscode/extensions.json
+
+# tests / coverage
+/coverage
+
+# vercel
+.vercel
+
+# types
+*.tsbuildinfo
+next-env.d.ts

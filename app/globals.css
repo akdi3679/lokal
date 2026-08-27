@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ═══ Tokens identité LOKAL — relevés sur logo & affiche (§58 60-30-10) ═══ */
+@theme {
+  --color-cream: #faf6ee;
+  --color-paper: #fffdf7;
+  --color-navy: #1c2452;
+  --color-navy-deep: #141b3f;
+  --color-royal: #2b3a9c;
+  --color-sand: #c9a876;
+  --color-sand-soft: #ebdcbf;
+  --color-sand-pale: #f4ead6;
+  --color-ink: #23284a;
+  --color-muted: #565c7e;
+
+  --font-serif: var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans: var(--font-jost), "Jost", system-ui, sans-serif;
+
+  --ease-lokal: cubic-bezier(0.22, 0.75, 0.25, 1);
+  --shadow-lokal: 0 18px 44px -18px rgb(20 27 63 / 0.28);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-navy);
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-royal);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* Grain subtil — signature visuelle (multiply, non interactif) */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Skip link (§43) */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 100;
+  background: var(--color-navy);
+  color: var(--color-cream);
+  padding: 0.7rem 1.2rem;
+  border-radius: 0 0 10px 0;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+/* Panneau Fanar — entrée (§61 ease-out entrance) */
+@keyframes fanar-in {
+  from {
+    transform: translateY(140%);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.fanar-enter {
+  animation: fanar-in 600ms var(--ease-lokal);
+}
+
+/* WCAG 2.2 — prefers-reduced-motion (§43) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+ @keyframes tick { to { transform: translateX(-50%); } }
+ @keyframes fanar-in {
+  from { transform: translateY(140%); opacity: 0; }
+  to   { transform: none;           opacity: 1; }
+}
+.fanar-enter {
+  animation: fanar-in 600ms var(--ease-lokal);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1);   opacity: 0.55; }
+  50%      { transform: scale(1.5); opacity: 0;    }
+}
+/* Ancres : compense le header sticky */
+section[id], div[id] { scroll-margin-top: 96px; }
+
+/* Rangées horizontales : scrollbar masquée mais scroll intact */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
