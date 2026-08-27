@@ -50,7 +50,7 @@ export default function MobileMenu() {
         style={{ transitionTimingFunction: "cubic-bezier(0.22,0.75,0.25,1)" }}
       >
         <div className="absolute top-5 left-[8%] right-[8%] flex items-center justify-between">
-          <LogoStatic inkColor="#FAF6EE" bgColor="#1C2452" height={26} />
+<LogoStatic inkColor="#FAF6EE" bgColor="#1C2452" height={26} />
           <button
             type="button"
             onClick={() => setOpen(false)}

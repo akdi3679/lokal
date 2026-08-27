@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 /**
- * Webhook de revalidation Sanity (inactif tant que SANITY_REVALIDATE_SECRET
- * n'est pas défini). Sécurité §19 : secret partagé + schéma Zod + pas de
- * traitement lourd dans la requête.
+ * Webhook Sanity-ready (§19/§77) : secret + schéma Zod.
+ * Next 16 : revalidatePath(path, "page") — 2 args obligatoires.
  */
 const PayloadSchema = z.object({
   _type: z.enum(["creator", "creation", "category", "event", "announcement", "brand"]),
@@ -37,27 +36,23 @@ export async function POST(req: Request) {
   const { _type, slug } = parsed.data;
 
   switch (_type) {
-   case "creator":
-  revalidatePath("/createurs", "page");
-  if (slug) revalidatePath(`/createurs/${slug}`, "page");
-  break;
+    case "creator":
+      revalidatePath("/createurs", "page");
+      if (slug) revalidatePath(`/createurs/${slug}`, "page");
+      break;
     case "creation":
-  revalidatePath("/creations", "page");
-  revalidateTag("creations");
-  break;
-case "category":
-  revalidatePath("/creations", "page");
-  revalidatePath("/cadeaux", "page");
-  break;
-case "event":
-case "announcement":
-  revalidatePath("/actualites", "page");
-  revalidatePath("/", "page");
-  break;
-case "brand":
-  revalidatePath("/", "page");
-  revalidatePath("/la-boutique", "page");
-  break;
+    case "category":
+      revalidatePath("/creations", "page");
+      break;
+    case "event":
+    case "announcement":
+      revalidatePath("/actualites", "page");
+      revalidatePath("/", "page");
+      break;
+    case "brand":
+      revalidatePath("/", "page");
+      revalidatePath("/la-boutique", "page");
+      break;
   }
 
   return NextResponse.json({ revalidated: true, _type });
