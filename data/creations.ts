@@ -1,11 +1,10 @@
-import { CreationSchema, type Creation } from "@/schemas/creation";
-
+import { CreationSchema, type Creation, type CreationInput } from "@/schemas/creation";
 /**
  * ⚠️ Créations = EXEMPLES de démonstration. Aucun prix inventé.
  * Disponibilité toujours "on-request" → confirmer en boutique.
  * Remplacer par vraies fiches produit quand LOKAL fournit photos/prix.
  */
-const raw: Creation[] = [
+const raw: CreationInput[] = [
   {
     id: "c1",
     creatorId: "atelier-foret",

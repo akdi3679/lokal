@@ -1,11 +1,11 @@
-import { CreatorSchema, type Creator } from "@/schemas/creator";
-
+import { CreatorSchema, type Creator, type CreatorInput } from "@/schemas/creator";
 /**
  * 18 créateurs LOKAL — données réelles où vérifiées publiquement,
  * placeholders clairement marqués `verified:false` ailleurs.
  * Source : Ouest-France, Grand Quartier, sites officiels des créateurs.
  */
-const raw: Creator[] = [
+
+const raw: CreatorInput[] = [
   // ✔ vérifiés publiquement
   {
     id: "verrev",
@@ -108,7 +108,7 @@ const raw: Creator[] = [
     verified: false,
   },
   // ⚠️ placeholders pour les 11 autres créateurs — à compléter avec LOKAL
-  ...Array.from({ length: 11 }).map<Creator>((_, i) => ({
+...Array.from({ length: 11 }).map<CreatorInput>((_, i) => ({
     id: `createur-${i + 8}`,
     name: "À découvrir",
     slug: `createur-${i + 8}`,

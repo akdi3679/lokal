@@ -23,3 +23,4 @@ export const CreationSchema = z.object({
 });
 
 export type Creation = z.infer<typeof CreationSchema>;
+export type CreationInput = z.input<typeof CreationSchema>; // ← AJOUTER

@@ -49,8 +49,10 @@ function withSecurityHeaders(): NextResponse {
 }
 
 export function proxy(request: NextRequest) {
-  const { pathname, method } = request.nextUrl;
-
+  
+// APRÈS (correct) :
+const { pathname } = request.nextUrl;
+const { method } = request;
   // 1 · Rate limit formulaire contact (L1 : 5 req/min/IP)
   if (pathname === "/api/contact" && method === "POST") {
     const ip =
