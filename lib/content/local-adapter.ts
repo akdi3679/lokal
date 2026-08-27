@@ -3,9 +3,9 @@ import type {
   CreationFilter,
   ScheduleDay,
   Announcement,
+  Media,
+  GiftEntry,
 } from "./types";
-import type { Creator } from "@/schemas/creator";
-import type { Creation } from "@/schemas/creation";
 import type { Category } from "@/schemas/category";
 import type { Event } from "@/schemas/event";
 
@@ -15,11 +15,10 @@ import { CATEGORIES } from "@/data/categories";
 import { SCHEDULE } from "@/data/schedule";
 import { EVENTS } from "@/data/events";
 import { ANNOUNCEMENTS } from "@/data/announcements";
+import { UNIVERS } from "@/data/univers";
+import { MEDIA } from "@/data/media";
+import { GIFTS } from "@/data/gifts";
 
-/**
- * Adapter v1 — lit les données locales typées.
- * Migration Sanity = remplacer cet export par sanityAdapter dans ./index.ts.
- */
 export const localAdapter: ContentAdapter = {
   async getCreators() {
     return CREATORS.filter((c) => c.active);
@@ -50,5 +49,14 @@ export const localAdapter: ContentAdapter = {
   },
   async getAnnouncements(): Promise<Announcement[]> {
     return ANNOUNCEMENTS;
+  },
+  async getUnivers() {
+    return UNIVERS;
+  },
+  async getMedia(): Promise<Media> {
+    return MEDIA;
+  },
+  async getGifts(): Promise<GiftEntry[]> {
+    return GIFTS;
   },
 };

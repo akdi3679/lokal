@@ -21,7 +21,8 @@ export default async function WorksGrid() {
             const c = w.creatorId ? creatorMap.get(w.creatorId) : null;
             return (
               <article key={w.id} className="overflow-hidden rounded-2xl border border-navy/10 bg-paper transition hover:-translate-y-1 hover:shadow-(--shadow-lokal)">
-            <SmartImage src={work.images[0]?.url ?? null} label={work.name} tone={work.name.length} alt={work.name} className="aspect-[4/3] w-full" />
+<SmartImage src={w.images[0]?.url ?? null} label={w.name} tone={w.name.length} alt={w.name} className="aspect-[4/3] w-full" />
+
                 <div className="flex flex-col gap-1 p-5">
                   <h3 className="font-serif text-lg font-bold text-navy">{w.name}</h3>
                   {c ? (
