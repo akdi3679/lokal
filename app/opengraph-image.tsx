@@ -14,7 +14,7 @@ export default async function Image() {
       "https://raw.githubusercontent.com/google/fonts/main/ofl/jost/Jost%5Bwght%5D.ttf",
     );
     if (res.ok) {
-      fonts = [{ name: "Jost", data: await res.arrayBuffer(), weight: 600, style: "normal" }];
+fonts = [{ name: "Jost", data: await res.arrayBuffer(), weight: 600 as const, style: "normal" as const }];
     }
   } catch {
     fonts = [];

@@ -37,27 +37,27 @@ export async function POST(req: Request) {
   const { _type, slug } = parsed.data;
 
   switch (_type) {
-    case "creator":
-      revalidatePath("/createurs");
-      if (slug) revalidatePath(`/createurs/${slug}`);
-      break;
+   case "creator":
+  revalidatePath("/createurs", "page");
+  if (slug) revalidatePath(`/createurs/${slug}`, "page");
+  break;
     case "creation":
-      revalidatePath("/creations");
-      revalidateTag("creations");
-      break;
-    case "category":
-      revalidatePath("/creations");
-      revalidatePath("/cadeaux");
-      break;
-    case "event":
-    case "announcement":
-      revalidatePath("/actualites");
-      revalidatePath("/");
-      break;
-    case "brand":
-      revalidatePath("/");
-      revalidatePath("/la-boutique");
-      break;
+  revalidatePath("/creations", "page");
+  revalidateTag("creations");
+  break;
+case "category":
+  revalidatePath("/creations", "page");
+  revalidatePath("/cadeaux", "page");
+  break;
+case "event":
+case "announcement":
+  revalidatePath("/actualites", "page");
+  revalidatePath("/", "page");
+  break;
+case "brand":
+  revalidatePath("/", "page");
+  revalidatePath("/la-boutique", "page");
+  break;
   }
 
   return NextResponse.json({ revalidated: true, _type });
