@@ -6,7 +6,8 @@ import { BRAND } from "@/data/brand";
 
 export default async function Planning() {
   const schedule = await content.getSchedule();
-
+const creators = await content.getCreators();
+const byBrand = new Map(creators.map((c) => [c.brand, c]));
   return (
     <section className="relative overflow-hidden bg-navy py-20 text-cream md:py-28">
       <PatternDots color="rgba(201,168,118,0.18)" className="pointer-events-none absolute top-6 right-[4%] w-[130px]" />
@@ -33,12 +34,13 @@ export default async function Planning() {
                 <ul className="mt-3 space-y-4 rounded-xl bg-paper p-4">
                   {d.who.map((w) => (
                     <li key={w.brand} className="flex items-center gap-3 border-t-2 border-sand-soft pt-4 first:border-0 first:pt-0">
-                      <SmartImage
-                        label={w.brand}
-                        tone={i}
-                        alt={`${w.name} — ${w.brand}`}
-                        className="size-12 shrink-0 rounded-full"
-                      />
+                     <SmartImage
+  src={byBrand.get(w.brand)?.portrait?.url ?? null}
+  label={w.brand}
+  tone={i}
+  alt={`${w.name} — ${w.brand}`}
+  className="size-12 shrink-0 rounded-full"
+/>
                       <span className="text-left">
                         <span className="block font-semibold text-ink">{w.name}</span>
                         <span className="block text-sm font-semibold text-royal">{w.brand}</span>

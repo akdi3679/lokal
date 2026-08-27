@@ -1,8 +1,10 @@
-import Link from "next/link";
-import { BRAND } from "@/data/brand";
+import { content } from "@/lib/content";
 import SmartImage from "@/components/ui/SmartImage";
-const TILES = 6;
-export default function InstaGallery() {
+import { BRAND } from "@/data/brand";
+
+export default async function InstaGallery() {
+  const media = await content.getMedia();
+
   return (
     <section className="py-20 md:py-28">
       <div className="mx-auto w-[min(1180px,92%)]">
@@ -16,27 +18,28 @@ export default function InstaGallery() {
               Le quotidien, <em className="text-royal">en images</em>
             </h2>
           </div>
-          <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full bg-navy px-6 py-3 font-semibold text-cream hover:bg-royal">
+          <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" className="rounded-full bg-navy px-6 py-3 font-semibold text-cream transition hover:bg-royal">
             Suivre {BRAND.instagramHandle}
           </a>
         </div>
-       <div className="mt-10 grid grid-cols-3 gap-3 md:grid-cols-6">
-  {["Boutique", "Bijoux", "Vitrail", "Bois", "Affiches", "Sacs"].map((label, i) => (
-    <a
-      key={label}
-      href={BRAND.instagram}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Voir le fil Instagram ${BRAND.instagramHandle} — ${label}`}
-      className="group relative aspect-square overflow-hidden rounded-xl transition hover:scale-[1.04]"
-    >
-      <SmartImage label={label} tone={i} alt={`Vu chez LOKAL — ${label}`} className="size-full" />
-      <span className="absolute inset-x-0 bottom-0 translate-y-full bg-navy-deep/85 py-2 text-center text-[0.68rem] font-semibold text-sand transition-transform duration-300 group-hover:translate-y-0">
-        {BRAND.instagramHandle}
-      </span>
-    </a>
-  ))}
-</div>
+
+        <div className="mt-10 grid grid-cols-3 gap-3 md:grid-cols-6">
+          {media.insta.map((img, i) => (
+            <a
+              key={i}
+              href={BRAND.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Voir le fil Instagram ${BRAND.instagramHandle}`}
+              className="group relative aspect-square overflow-hidden rounded-xl transition hover:scale-[1.04]"
+            >
+              <SmartImage src={img.url} label={img.alt} tone={i} alt={img.alt} className="size-full" />
+              <span className="absolute inset-x-0 bottom-0 translate-y-full bg-navy-deep/85 py-2 text-center text-[0.68rem] font-semibold text-sand transition-transform duration-300 group-hover:translate-y-0">
+                {BRAND.instagramHandle}
+              </span>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );

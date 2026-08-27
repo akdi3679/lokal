@@ -21,10 +21,25 @@ export interface Announcement {
   text: string;
 }
 
-/**
- * Contrat unique pour toute source de contenu.
- * Swapper local-adapter ↔ sanity-adapter = 1 ligne dans lib/content/index.ts.
- */
+export interface MediaImage {
+  url: string;
+  alt: string;
+}
+
+export interface Media {
+  hero: MediaImage;
+  insta: MediaImage[];
+}
+
+export interface GiftEntry {
+  id: string;
+  label: string;
+  desc: string;
+  href: string;
+  icons: string[];
+}
+
+/** Contrat unique — swapper local → Sanity = 1 ligne dans index.ts. */
 export interface ContentAdapter {
   getCreators(): Promise<Creator[]>;
   getCreator(slug: string): Promise<Creator | null>;
@@ -34,4 +49,7 @@ export interface ContentAdapter {
   getSchedule(): Promise<ScheduleDay[]>;
   getEvents(): Promise<Event[]>;
   getAnnouncements(): Promise<Announcement[]>;
+  getUnivers(): Promise<string[]>;
+  getMedia(): Promise<Media>;
+  getGifts(): Promise<GiftEntry[]>;
 }

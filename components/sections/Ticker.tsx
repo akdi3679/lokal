@@ -1,51 +1,30 @@
-const UNIVERS = [
-  "Bijoux", "Céramique", "Vitrail", "Bois", "Illustration", "Bougies",
-  "Textile", "Savons", "Kokedamas", "Upcycling", "Décoration", "Affiches",
-];
+import { content } from "@/lib/content";
 
-/**
- * Barre sous le hero — défilement CONTINU infini (32s, linear, seamless).
- * Keyframes injectées dans <head> via useEffect pour garantir l'application.
- */
-export default function Ticker() {
-  const items = [...UNIVERS, ...UNIVERS];
-
-  // Injection des keyframes dans <head> au montage
-  if (typeof window !== "undefined") {
-    if (!document.getElementById("lokal-ticker-styles")) {
-      const style = document.createElement("style");
-      style.id = "lokal-ticker-styles";
-      style.textContent = `
-        @keyframes lokal-tick {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-  }
+export default async function Ticker() {
+  const univers = await content.getUnivers();
 
   return (
     <div className="overflow-hidden bg-navy py-3.5">
+      <style>{"@keyframes lokal-tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}"}</style>
       <div
-        className="flex whitespace-nowrap"
-        style={{
-          width: "max-content",
-          animation: "lokal-tick 32s linear infinite",
-        }}
+        className="hover:[animation-play-state:paused]"
+        style={{ display: "flex", width: "max-content", animation: "lokal-tick 30s linear infinite" }}
       >
-        {items.map((u, i) => (
-          <span
-            key={i}
-            className="flex items-center text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-sand"
-            style={{ marginRight: "2.5rem" }}
-            aria-hidden={i >= UNIVERS.length || undefined}
-          >
-            {u}
-            <span style={{ marginLeft: "2.5rem" }} className="text-cream" aria-hidden="true">
-              ✦
-            </span>
-          </span>
+        {[0, 1].map((copy) => (
+          <div key={copy} aria-hidden={copy === 1 || undefined} style={{ display: "flex" }}>
+            {univers.map((u) => (
+              <span
+                key={u}
+                className="flex items-center text-[0.95rem] font-semibold uppercase tracking-[0.14em] text-sand"
+                style={{ marginRight: "2.5rem" }}
+              >
+                {u}
+                <span className="text-cream" style={{ marginLeft: "2.5rem" }} aria-hidden="true">
+                  ✦
+                </span>
+              </span>
+            ))}
+          </div>
         ))}
       </div>
     </div>
