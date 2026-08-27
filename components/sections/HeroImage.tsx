@@ -13,7 +13,7 @@ export default function HeroImage() {
   if (failed) {
     return (
       <div
-        className="relative z-10 grid aspect-[4/5] w-full max-w-[480px] rotate-2 place-items-center rounded-2xl bg-navy shadow-(--shadow-lokal)"
+        className="relative z-10 grid aspect-[4/5] w-full max-w-[480px] rotate-2 place-items-center rounded-2xl bg-navy shadow-[var(--shadow-lokal)]"
         role="img"
         aria-label="LOKAL — boutique de créateurs"
       >
@@ -33,7 +33,7 @@ export default function HeroImage() {
       alt="L'intérieur de la boutique LOKAL — créations artisanales locales"
       onError={() => setFailed(true)}
       loading="eager"
-      className="relative z-10 aspect-[4/5] w-full max-w-[480px] rotate-2 rounded-2xl object-cover shadow-(--shadow-lokal)"
+      className="relative z-10 aspect-[4/5] w-full max-w-[480px] rotate-2 rounded-2xl object-cover shadow-[var(--shadow-lokal)]"
     />
   );
 }
