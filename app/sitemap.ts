@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { content } from "@/lib/content";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const creators = await content.getCreators();
   const now = new Date();

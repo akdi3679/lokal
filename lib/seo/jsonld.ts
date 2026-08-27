@@ -1,7 +1,6 @@
 import { BRAND } from "@/data/brand";
 
-const BASE = () => process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
+const BASE = () => process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 /** Store / LocalBusiness — local SEO (§42, brief §37). Données réelles ✔. */
 export function storeJsonLd() {
   return {

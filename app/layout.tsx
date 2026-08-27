@@ -16,7 +16,7 @@ const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variabl
 const jost = Jost({ subsets: ["latin"], display: "swap", variable: "--font-jost" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
     default: "LOKAL — Boutique de créateurs à Saint-Grégoire (Rennes)",
     template: "%s · LOKAL",
