@@ -7,7 +7,7 @@ const CATS = [
 ];
 export default function Categories() {
   return (
-    <section className="py-20 md:py-28">
+      <section className="py-20 md:py-28" id="decouvrir">
       <div className="mx-auto w-[min(1180px,92%)]">
         <p className="inline-flex items-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-royal">
           <span className="size-2.5 rotate-45 bg-sand [border-radius:0_100%_0_100%]" aria-hidden="true" />Explorer
