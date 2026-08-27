@@ -5,7 +5,7 @@ import { content } from "@/lib/content";
 import { BRAND } from "@/data/brand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/seo/jsonld";
-
+import SmartImage from "@/components/ui/SmartImage";
 interface Props {
   params: Promise<{ slug: string }>;
 }
@@ -52,11 +52,12 @@ export default async function CreatorPage({ params }: Props) {
 
         {/* Hero §7 */}
         <header className="mt-8 grid gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div className="relative aspect-[4/5] max-w-[440px] overflow-hidden rounded-2xl bg-navy p-10 text-sand">
-            <span className="font-serif text-[8rem] font-extrabold leading-none" aria-hidden="true">
-              {creator.name[0]}
-            </span>
-          </div>
+        <SmartImage
+  src={creator.portrait?.url ?? null}
+  label={creator.brand}
+  alt={`${creator.name} — ${creator.brand}`}
+  className="relative aspect-[4/5] w-full max-w-[440px] rounded-2xl"
+/>
           <div>
             <p className="inline-flex items-center gap-2 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-royal">
               <span className="size-2.5 rotate-45 bg-sand [border-radius:0_100%_0_100%]" aria-hidden="true" />
@@ -92,13 +93,7 @@ export default async function CreatorPage({ params }: Props) {
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {works.map((w) => (
                 <article key={w.id} className="overflow-hidden rounded-2xl border border-navy/10 bg-paper">
-                  <div className="grid aspect-[4/3] place-items-center bg-sand-pale text-navy">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-                      <rect x="4" y="4" width="16" height="16" rx="2" />
-                      <circle cx="9" cy="9" r="1.5" fill="currentColor" />
-                      <path d="m4 16 5-5 4 4 3-3 4 4" />
-                    </svg>
-                  </div>
+                  <SmartImage src={w.images[0]?.url ?? null} label={w.name} alt={w.name} className="aspect-[4/3] w-full" />
                   <div className="p-5">
                     <h3 className="font-serif text-lg font-bold text-navy">{w.name}</h3>
                     <span className={`mt-2 inline-block rounded-full px-2.5 py-1 text-[0.72rem] font-bold uppercase ${w.unique ? "bg-navy text-sand" : "bg-sand-pale text-navy"}`}>

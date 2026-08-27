@@ -12,8 +12,7 @@ export default async function Spotlight() {
       <div className="mx-auto grid w-[min(1180px,92%)] gap-10 md:grid-cols-2 md:items-center">
         <div className="relative">
           <PatternDots color="rgba(201,168,118,0.4)" className="absolute -top-10 -left-10 w-[220px]" />
-         <SmartImage
-  label={featured.brand}
+        <SmartImage src={featured.portrait?.url ?? null} label={featured.brand}
   tone={1}
   alt={`${featured.name} — ${featured.brand}`}
   className="relative aspect-[4/5] w-full max-w-[440px] rounded-2xl shadow-(--shadow-lokal)"

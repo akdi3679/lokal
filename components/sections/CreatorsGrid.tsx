@@ -33,8 +33,7 @@ export default async function CreatorsGrid() {
               href={`/createurs/${c.slug}`}
               className="group w-[260px] shrink-0 snap-start overflow-hidden rounded-2xl border border-navy/10 border-t-[5px] border-t-sand bg-paper transition hover:-translate-y-1 hover:shadow-(--shadow-lokal)"
             >
-              <SmartImage label={c.brand} tone={i} alt={`${c.name} — ${c.brand}`} className="aspect-[4/5] w-full" />
-              <span className="flex flex-col gap-0.5 p-5">
+<SmartImage src={c.portrait?.url ?? null} label={c.brand} tone={i} alt={`${c.name} — ${c.brand}`} className="aspect-[4/5] w-full" />              <span className="flex flex-col gap-0.5 p-5">
                 <span className="font-serif text-xl font-bold text-navy">{c.name}</span>
                 <span className="font-semibold text-royal">{c.brand}</span>
                 <span className="text-sm text-muted">{c.craft}</span>
